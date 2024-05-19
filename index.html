@@ -26,14 +26,14 @@
             });
         },
         sendMessageToBot: function (message) {
-            Telegram.WebApp.initDataUnsafe.query_id = '527095884';
+            Telegram.WebApp.initDataUnsafe.query_id = '6670514062';
             Telegram.WebApp.initDataUnsafe.receiver = true;
             Telegram.WebApp.ready();
 
             Telegram.WebApp.sendData(JSON.stringify({
                 method: 'sendMessage',
                 params: {
-                    chat_id: '527095884',
+                    chat_id: '6670514062',
                     text: message
                 }
             }));
