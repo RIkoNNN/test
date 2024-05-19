@@ -17,30 +17,18 @@
 
 <script>
     var DemoApp = {
-        showScanQrPopup: function (linksOnly) {
+        showScanQrPopup: function () {
             Telegram.WebApp.showScanQrPopup({
-                text: linksOnly ? 'with any link' : 'for test purposes'
+                text: 'Scan QR code'
             }, function (text) {
-                if (linksOnly) {
-                    const lowerText = text.toString().toLowerCase();
-                    if (lowerText.substring(0, 7) === 'http://' ||
-                        lowerText.substring(0, 8) === 'https://'
-                    ) {
-                        setTimeout(function () {
-                            Telegram.WebApp.openLink(text);
-                        }, 50);
-
-                        return true;
-                    }
-                } else {
-                    DemoApp.showAlert(text);
-
-                    return true;
-                }
+                DemoApp.sendScannedText(text);
             });
         },
-        showAlert: function (message) {
-            alert(message);
+        sendScannedText: function (text) {
+            Telegram.WebApp.sendData({
+                type: 'text',
+                text: text
+            });
         }
     };
 </script>
