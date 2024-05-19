@@ -17,18 +17,16 @@
 
 <script>
     var DemoApp = {
-        showScanQrPopup: function () {
+        showScanQrPopup: function (linksOnly) {
             Telegram.WebApp.showScanQrPopup({
-                text: 'Scan QR code'
+                text: linksOnly ? 'with any link' : 'for test purposes'
             }, function (text) {
-                DemoApp.sendScannedText(text);
+                    DemoApp.showAlert(text);
+                    return true;
             });
         },
-        sendScannedText: function (text) {
-            Telegram.WebApp.sendData({
-                type: 'text',
-                text: text
-            });
+        showAlert: function (message) {
+            alert(message);
         }
     };
 </script>
