@@ -16,28 +16,33 @@
 <button onclick="DemoApp.showScanQrPopup();">Scan QR Code</button>
 
 <script>
-    function showScanQrPopup(linksOnly) {
-        Telegram.WebApp.showScanQrPopup({
-            text: linksOnly ? 'with any link' : 'for test purposes'
-        }, function (text) {
-            if (linksOnly) {
-                const lowerText = text.toString().toLowerCase();
-                if (lowerText.substring(0, 7) === 'http://' ||
-                    lowerText.substring(0, 8) === 'https://'
-                ) {
-                    setTimeout(function () {
-                        Telegram.WebApp.openLink(text);
-                    }, 50);
+    var DemoApp = {
+        showScanQrPopup: function (linksOnly) {
+            Telegram.WebApp.showScanQrPopup({
+                text: linksOnly ? 'with any link' : 'for test purposes'
+            }, function (text) {
+                if (linksOnly) {
+                    const lowerText = text.toString().toLowerCase();
+                    if (lowerText.substring(0, 7) === 'http://' ||
+                        lowerText.substring(0, 8) === 'https://'
+                    ) {
+                        setTimeout(function () {
+                            Telegram.WebApp.openLink(text);
+                        }, 50);
+
+                        return true;
+                    }
+                } else {
+                    DemoApp.showAlert(text);
 
                     return true;
                 }
-            } else {
-                DemoApp.showAlert(text);
-
-                return true;
-            }
-        });
-    }
+            });
+        },
+        showAlert: function (message) {
+            alert(message);
+        }
+    };
 </script>
 </body>
 </html>
