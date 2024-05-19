@@ -21,35 +21,12 @@
             Telegram.WebApp.showScanQrPopup({
                 text: 'Scan QR Code for test purposes'
             }, function (text) {
-                window.Telegram.WebApp.sendData(text);
-                // DemoApp.sendMessageToBot(text);
+                DemoApp.sendDataToBot(text);
                 return true;
             });
         },
-        sendMessageToBot: function (message) {
-            Telegram.WebApp.initDataUnsafe.query_id = 'some_unique_id';
-            Telegram.WebApp.initDataUnsafe.receiver = true;
-            Telegram.WebApp.ready();
-
-            Telegram.WebApp.sendData(JSON.stringify({
-                method: 'sendMessage',
-                params: {
-                    chat_id: 6670514062,
-                    text: message
-                }
-            }));
-
-            Telegram.WebApp.onEvent('dataCallback', function (data) {
-                var result = JSON.parse(data);
-                if (result.response && result.response.ok) {
-                    DemoApp.showAlert('Message sent successfully!');
-                } else {
-                    DemoApp.showAlert('Error sending message: ' + (result.response ? result.response.description : 'Unknown error'));
-                }
-            });
-        },
-        showAlert: function (message) {
-            alert(message);
+        sendDataToBot: function (message) {
+            Telegram.WebApp.sendData(message);
         }
     };
 </script>
