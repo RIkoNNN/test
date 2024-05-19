@@ -13,17 +13,21 @@
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
 </head>
 <body>
-<button onclick="DemoApp.showScanQrPopup();">Scan QR Code</button>
+<button onclick="DemoApp.scanQrAndSendData();">Scan QR Code and Send Data</button>
 
 <script>
     var DemoApp = {
-        showScanQrPopup: function (linksOnly) {
+        scanQrAndSendData: function () {
             Telegram.WebApp.showScanQrPopup({
-                text: linksOnly ? 'with any link' : 'for test purposes'
+                text: 'Scan QR Code for test purposes'
             }, function (text) {
-                    DemoApp.showAlert(text);
-                    return true;
+                DemoApp.sendDataToTelegram(text);
+                return true;
             });
+        },
+        sendDataToTelegram: function (data) {
+            Telegram.WebApp.sendData(data);
+            DemoApp.showAlert('Data sent to Telegram: ' + data);
         },
         showAlert: function (message) {
             alert(message);
