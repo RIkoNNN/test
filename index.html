@@ -16,7 +16,9 @@
 <button onclick="DemoApp.scanQrAndSendMessage();">Scan QR Code and Send Message</button>
 
 <script>
+
     var DemoApp = {
+
         scanQrAndSendMessage: function () {
             Telegram.WebApp.showScanQrPopup({
                 text: 'Scan QR Code for test purposes'
@@ -26,12 +28,20 @@
             });
         },
         sendDataToBot: function (message) {
-            fetch('https://376d-95-26-11-76.ngrok-free.app/getpost/', { // Замените 'YOUR_TELEGRAM_BOT_API_URL_HERE' на URL вашего бота
+            // Получение токена бота из параметров URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const botToken = '6670514062:AAGrOdk-QarbcUZK5uJKwV_8gpIe34pUnN0';
+
+            // Отправка сообщения боту
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: message }),
+                body: JSON.stringify({
+                    chat_id: Telegram.WebApp.initDataUnsafe.user.id,
+                    text: message
+                }),
             })
                 .then(response => {
                     if (response.ok) {
@@ -45,6 +55,9 @@
                 });
         },
     };
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
