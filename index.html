@@ -21,7 +21,7 @@
             Telegram.WebApp.showScanQrPopup({
                 text: 'Scan QR Code for test purposes'
             }, function (text) {
-                Telegram.WebApp.sendMessage(text)
+                Telegram.WebApp.sendData(text)
             });
         }
     };
