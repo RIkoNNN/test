@@ -22,8 +22,7 @@
                 text: 'Scan QR Code for test purposes'
             }, function (text) {
                 Telegram.WebApp.sendData(text);
-                Telegram.WebApp.ready()
-                Telegram.WebApp.close()
+                Telegram.WebApp.close(); // Закрываем веб-приложение после отправки данных
             });
         }
     };
