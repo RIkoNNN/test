@@ -18,7 +18,13 @@
         text: 'Отсканируйте QR места приёмки'
     }, function (text) {
         Telegram.WebApp.sendData(text);
-        Telegram.WebApp.showAlert('Вы отсканировали',text);
+
+        Telegram.WebApp.onEvent('dataReceived', function(data) {
+            Telegram.WebApp.showAlert('Бот получил данные: ' + data,function () {
+                Telegram.WebApp.close();
+            });
+            Telegram.WebApp.closeScanQrPopup();
+        });
     });
 </script>
 </body>
