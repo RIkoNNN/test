@@ -19,8 +19,8 @@
     }, function (text) {
         Telegram.WebApp.sendData(text);
         setTimeout(function() {
-            Telegram.WebApp.close();
-        }, 1000); // Задержка в миллисекундах (1 секунда)
+            Telegram.WebApp.closeScanQrPopup();
+        }, 4000); // Задержка в миллисекундах (1 секунда)
     });
 </script>
 </body>
