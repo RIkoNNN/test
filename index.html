@@ -18,7 +18,9 @@
         text: 'Отсканируйте QR места приёмки'
     }, function (text) {
         Telegram.WebApp.sendData(text);
-        Telegram.WebApp.close();
+        setTimeout(function() {
+            Telegram.WebApp.close();
+        }, 1000); // Задержка в миллисекундах (1 секунда)
     });
 </script>
 </body>
